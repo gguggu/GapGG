@@ -1,0 +1,13 @@
+$DOHYEON_URL: '../../assets/fonts/DoHyeon';
+
+@mixin font_face($name, $url) {
+  font-family: $name;
+  font-display: block;  // 웹 폰트 로딩처리
+  src:url($url + '.ttf') format('truetype'),
+}
+
+$DOHYEON_REGULAR: 'DoHyeon Regular';
+
+@font-face { 
+  @include font_face($DOHYEON_REGULAR, $DOHYEON_URL + '-Regular');
+}
