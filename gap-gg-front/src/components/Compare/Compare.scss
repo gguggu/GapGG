@@ -1,0 +1,216 @@
+@import 'styles/color/ColorStyle.scss';
+@import 'styles/font/FontStyle.scss';
+
+.Compare{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  &-inputs{
+    width: 100%;
+    display: inherit;
+    flex-direction: row;
+    margin-bottom: 12px;
+    &-input{
+      width: 220px;
+      height: 35px;
+      display: inherit;
+      border: 0;
+      outline: 0;
+      margin-right: 12px;
+      background-color: $backShadowColor;
+      border-radius: 1px;
+      color: $white;
+      font-family: $DOHYEON_REGULAR;
+      padding: 5px;
+      &::placeholder{
+        color: $gray;
+        font-family: $DOHYEON_REGULAR;
+      }
+    }
+  }
+  &-contents{
+    width: 100%;
+    height: 100%;
+    display: inherit;
+    flex-direction: row;
+    &-leftCtt{
+      width: 70%;
+      height: 100%;
+      display: inherit;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      margin-right: 12px;
+      &-box{
+        background-color: $backColor;
+        display: inherit;
+        flex-direction: column;
+        width: 350px;
+        height: 200px;
+        margin: 10px;
+        border-radius: 3px;
+        &-title{
+          display: inherit;
+          align-items: center;
+          font-family: $DOHYEON_REGULAR;
+          font-size: 24px;
+          color: $white;
+          border-left: 5px solid $backShadowColor;
+          padding-left: 8px;
+          width: 100%;
+          height: 40px;
+        }
+        &-boxContent{
+          display: inherit;
+          flex-direction: row;
+          width: 100%;
+          height: 80%;
+          color: $white;
+          &-lefter{ 
+            display: inherit;
+            flex-direction: column;
+            width: 50%;
+            height: 100%;
+            &-name{
+              display: inherit;
+              align-items: center;
+              justify-content: center;
+              height: 40%;
+              font-size: 14px;
+              color: $white;
+            }
+            &-score{
+              display: inherit;
+              align-items: center;
+              justify-content: center;
+              height: 60%;
+              font-size: 20px;
+              color: $white;
+            }
+          }
+          &-righter{
+            display: inherit;
+            flex-direction: column;
+            width: 50%;
+            height: 100%;
+            &-name{
+              display: inherit;
+              align-items: center;
+              justify-content: center;
+              height: 40%;
+              font-size: 14px;
+              color: $white;
+            }
+            &-score{
+              display: inherit;
+              align-items: center;
+              justify-content: center;
+              height: 60%;
+              font-size: 20px;
+              color: $white;
+            }
+          }
+        }
+      }
+    }
+    &-rightCtt{
+      width: 30%;
+      height: 40%;
+      display: inherit;
+      flex-direction: column;
+      &-box{
+        width: 100%;
+        height: 100%;
+        background-color: $backColor;
+        display: inherit;
+        flex-direction: column;
+        border-radius: 3px;
+        &-title{
+          display: inherit;
+          align-items: center;
+          font-family: $DOHYEON_REGULAR;
+          font-size: 24px;
+          color: $white;
+          border-left: 5px solid $backShadowColor;
+          padding-left: 8px;
+          width: 100%;
+          height: 40px;
+        }
+        &-boxContent{
+          display: inherit;
+          flex-direction: row;
+          width: 100%;
+          height: 100%;
+          color: $white;
+          &-lefter{
+            display: inherit;
+            flex-direction: column;
+            width: 50%;
+            height: 100%;
+            &-name{
+              display: inherit;
+              align-items: center;
+              justify-content: center;
+              height: 40%;
+              font-size: 14px;
+              color: $white;
+            }
+            &-score{
+              display: inherit;
+              align-items: center;
+              justify-content: center;
+              flex-direction: row;
+              height: 60%;
+              font-size: 20px;
+              color: $white;
+              &-position{
+                display: inherit;
+                flex-direction: column;
+                font-size: 16px;
+                margin-right: 8px;
+                &>img{
+                  width: 32px;
+                  height: 32px;
+                }
+              }
+            }
+          }
+          &-righter{
+            display: inherit;
+            flex-direction: column;
+            width: 50%;
+            height: 100%;
+            &-name{
+              display: inherit;
+              align-items: center;
+              justify-content: center;
+              height: 40%;
+              font-size: 14px;
+              color: $white;
+            }
+            &-score{
+              display: inherit;
+              align-items: center;
+              justify-content: center;
+              flex-direction: row;
+              height: 60%;
+              font-size: 20px;
+              color: $white;
+              &-position{
+                display: inherit;
+                flex-direction: column;
+                font-size: 16px;
+                margin-right: 8px;
+                &>img{
+                  width: 32px;
+                  height: 32px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

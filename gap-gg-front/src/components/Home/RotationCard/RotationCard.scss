@@ -1,0 +1,44 @@
+@import 'styles/color/ColorStyle.scss';
+@import 'styles/font/FontStyle.scss';
+
+.RotationCard{
+  width: 72px;
+  height: 72px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: 15px;
+  box-shadow: 1px 1px 8px 0 rgba($color: $gray, $alpha: 0.4);
+  &:hover{
+    .RotationCard-tooltip{
+      visibility: visible;
+    }
+  }
+  &-tooltip{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    visibility: hidden;
+    z-index: 1;
+    display: inherit;
+    align-items: center;
+    justify-content: center;
+    color: $white;
+    font-size: 12px;
+    background-color: rgba($color: $black, $alpha: .4);
+    cursor: pointer;
+  }
+  &>img{
+    width: 72px;
+    min-width: 72px;
+    height: 72px;
+    min-height: 72px;
+    -webkit-user-drag: none;
+    user-select: none;
+    &:hover{
+      .RotationCard-tooltip{
+        visibility: visible;
+      }
+    }
+  }
+}
