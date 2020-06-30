@@ -24,7 +24,7 @@ class championStore {
         this.champion.push(championList[i][1]);
         i++;
       }
-
+      
       return new Promise((resolve, reject) => {
         resolve();
       });
@@ -70,6 +70,18 @@ class championStore {
     const { full, group } = image;
     const src = `${DDRAGON}/${VERSION}/img/${group}/${full}`
     return src;
+  }
+
+  @action compareChampion(championIdx){
+    let championName = '';
+    this.champion.some(data => {
+      const { id, key } = data;
+      if(championIdx === parseInt(key)){
+        championName = id;
+        return true;
+      }
+    });
+    return championName;
   }
 }
 
