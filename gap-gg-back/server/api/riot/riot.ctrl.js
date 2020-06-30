@@ -31,8 +31,52 @@ const searchSummonerName = async (req, res) => {
   }
 }
 
+const searchMatchList = async(req, res) => {
+  try {
+    const accountId = req.query.accountId;
+    const begin = parseInt(req.query.beginIndex);
+    const end = parseInt(req.query.endIndex);
+    const data = await lib.searchMatchList(accountId, begin, end);
+    res.json(data);
+  } catch (error) {
+    throw error;
+  }
+}
+
+const searchMatch = async(req, res) => {
+  try {
+    const matchId = req.query.matchId;
+    const data = await lib.searchMatch(matchId);
+    res.json(data);
+  } catch (error) {
+    throw error;
+  }
+}
+
+const getQueue = async(req, res) => {
+  try {
+    const data = await lib.getQueue();
+    res.json(data);
+  } catch (error) {
+    throw error;
+  }
+}
+
+const getSpell = async(req, res) => {
+  try {
+    const data = await lib.getSpell();
+    res.json(data);
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports={
   getChampion: getChampion,
   getRotation: getRotation,
-  searchSummonerName: searchSummonerName
+  searchSummonerName: searchSummonerName,
+  searchMatchList: searchMatchList,
+  searchMatch: searchMatch,
+  getQueue: getQueue,
+  getSpell: getSpell
 };
