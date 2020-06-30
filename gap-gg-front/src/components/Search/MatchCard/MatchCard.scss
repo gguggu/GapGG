@@ -1,0 +1,148 @@
+@import 'styles/color/ColorStyle.scss';
+@import 'styles/font/FontStyle.scss';
+
+.MatchCard{
+  width: 100%;
+  height: 150px;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  background-color: $backShadowTransColor;
+  padding: 10px;
+  border-radius: 3px;
+  color: $white;
+  margin: 10px 0;
+  &.fail{
+    background-color: $redTransColor;
+  }
+  &-typeWrap{
+    width: auto;
+    min-width: 100px;
+    height: 100%;
+    display: inherit;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    &-isWin{
+      font-family: $DOHYEON_REGULAR;
+      font-size: 22px;
+    }
+    &-startTime{
+      font-size: 12px;
+      margin-bottom: 3px;
+    }
+    &-queueType{
+      font-family: $DOHYEON_REGULAR;
+      font-size: 16px;
+    }
+    &-gameTime{
+      font-size: 12px;
+    }
+  }
+  &-inGameWrap{
+    width: auto;
+    min-width: 80px;
+    height: 100%;
+    display: inherit;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &-kda{
+      font-size: 20px;
+    }
+    &-level{
+      font-size: 16px;
+    }
+  }
+  &-championWrap{
+    width: 150px;
+    height: 100%;
+    display: inherit;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    &-championImg{
+      width: 64px;
+      height: 64px;
+      min-width: 64px;
+      min-height: 64px;
+      border-radius: 50px;
+      border: 3px solid $black;
+      margin-left: 10px;
+      margin-right: 5px;
+      -webkit-user-drag: none;
+      user-select: none;
+    }
+    &-spellWrap{
+      display: inherit;
+      flex-direction: column;
+      margin-right: 10px;
+      &-firstSpell{
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
+        min-height: 30px;
+        -webkit-user-drag: none;
+        user-select: none;
+        margin-bottom: 3px;
+        border: 1px solid $black;
+      }
+      &-secondSpell{
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
+        min-height: 30px;
+        -webkit-user-drag: none;
+        user-select: none;
+        border: 1px solid $black;
+      }
+    }
+  }
+  
+  &-itemList{
+    width: 300px;
+    height: 100%;
+    display: inherit;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-left: 150px;
+    &>img{
+      width: 42px;
+      height: 42px;
+      min-width: 42px;
+      min-height: 42px;
+    }
+    &>.noneItem{
+      background-color: $blackTransColor;
+    }
+  }
+  &-teamList{
+    width: 300px;
+    min-width: 300px;
+    height: 100%;
+    display: inherit;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: 50px;
+    &-member{
+      width: auto;
+      height: 25px;
+      min-height: 25px;
+      display: inherit;
+      flex-direction: row;
+      &>img{
+        width: 25px;
+        height: 25px;
+        min-width: 25px;
+        min-height: 25px;
+      }
+      &-summonerName{
+        display: inherit;
+        align-items: center;
+        font-size: 14px;
+      }
+    }
+  }
+}
