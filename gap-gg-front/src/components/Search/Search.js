@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Search.scss';
+import Loader from 'components/common/Loader';
 
-const Search = ({ isPending, summoner, getProfile }) => {
+const Search = ({ isPending, summoner, getProfile, matchItem }) => {
   const { name, summonerLevel, profileIconId } = summoner;
-  const src = getProfile(profileIconId);
+  const src = profileIconId && getProfile(profileIconId);
   return (
     <>
       {
-        isPending ? <>loading</> : 
+        isPending ? <Loader/> : 
           <div className="Search">
             <div className="Search-top">
               <div className="Search-top-imgWrap">
@@ -21,7 +22,7 @@ const Search = ({ isPending, summoner, getProfile }) => {
               </div>
             </div>
             <div className="Search-middle">
-
+              {matchItem}
             </div>
           </div>
         }
@@ -32,7 +33,8 @@ const Search = ({ isPending, summoner, getProfile }) => {
 Search.propTypes = {
   isPending: PropTypes.bool.isRequired,
   summoner: PropTypes.object.isRequired,
-  getProfile: PropTypes.func.isRequired
+  getProfile: PropTypes.func.isRequired,
+  matchItem: PropTypes.array.isRequired
 };
 
 export default Search;
