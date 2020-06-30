@@ -11,7 +11,8 @@
   position: relative;
   &-back{
     width: 100%;
-    height: 100%;
+    height: 1080px;
+    min-height: 1080px;
     background-image: url("../../../assets/images/gap-back3.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -39,7 +40,6 @@
     padding-top: 150px;
     min-width: 1350px;
     max-width: 1350px;
-    height: 1080px;
     min-height: 1080px;
     padding-bottom: 150px;
   }
