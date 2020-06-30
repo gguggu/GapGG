@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import HOMELOGO from 'assets/images/GapLogo_white.png';
 import './Home.scss';
+import Loader from 'components/common/Loader';
 
 const Home = ({ isPending, rotationItem, handleSummonerName, handleSummonerBtn }) => {
   return (
     <>
     {
-      isPending ? <>loading</>
+      isPending ? <Loader/>
         : 
       <div className="Home">
         <img src={HOMELOGO} alt="homeLogo"/>
