@@ -11,6 +11,7 @@ class SummonerStore {
   @observable detailMatches=[];
   @observable queues=[];
   @observable spells=[];
+  @observable tier=[];
 
   @action async searchSummoner(name){
     try {
@@ -93,6 +94,41 @@ class SummonerStore {
         this.spells.push(spellList[i][1]);
         i++;
       }
+
+      return new Promise((resolve, reject) => {
+        resolve();
+      })
+    } catch (error) {
+      return new Promise((resolve, reject) => {
+        reject(error);
+      })
+    }
+  }
+
+  @action async getSummonerTier(){
+    try {
+      const { id } = this.summoner;
+      const data = await SummonerRepository.getSummonerTier(id);
+      const tierList = data.data;
+      let processedTier = [];
+
+      for(let tierData of tierList){
+        const { leaguePoints, losses, wins, tier, rank, queueType, leagueId } = tierData;
+
+        const processedData = {
+          leaguePoints,
+          losses,
+          wins,
+          tier,
+          rank,
+          queueType,
+          leagueId
+        };
+
+        processedTier.push(processedData);
+      }
+      this.tier=processedTier;
+      console.log(this.tier);
 
       return new Promise((resolve, reject) => {
         resolve();

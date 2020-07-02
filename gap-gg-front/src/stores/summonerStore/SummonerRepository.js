@@ -47,6 +47,15 @@ class SummonerRepository{
       throw error;
     }
   }
+
+  async getSummonerTier(name){
+    try {
+      const data = await axios.get(`${SERVER}/api/riot/summonerTier?summonerName=${name}`);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default new SummonerRepository();
