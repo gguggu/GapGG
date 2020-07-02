@@ -10,5 +10,6 @@ riot.get('/matchList', riotCtrl.searchMatchList);
 riot.get('/match', riotCtrl.searchMatch);
 riot.get('/queue', riotCtrl.getQueue);
 riot.get('/spell', riotCtrl.getSpell);
+riot.get('/summonerTier', riotCtrl.getSummonerTier);
 
 module.exports = riot;

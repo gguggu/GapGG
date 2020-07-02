@@ -71,6 +71,16 @@ const getSpell = async(req, res) => {
   }
 }
 
+const getSummonerTier = async(req, res) => {
+  try {
+    const summonerName = req.query.summonerName;
+    const data = await lib.getSummonerTier(summonerName);
+    res.json(data);
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports={
   getChampion: getChampion,
   getRotation: getRotation,
@@ -78,5 +88,6 @@ module.exports={
   searchMatchList: searchMatchList,
   searchMatch: searchMatch,
   getQueue: getQueue,
-  getSpell: getSpell
+  getSpell: getSpell,
+  getSummonerTier: getSummonerTier
 };

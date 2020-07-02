@@ -89,6 +89,18 @@ const getSpell = async() => {
   }
 }
 
+const getSummonerTier = async(summonerName) => {
+  try {
+    let tier;
+    await request.get(`${RIOT_URL}/league/v4/entries/by-summoner/${summonerName}?api_key=${API_KEY}`, (err, res, body) => {
+      tier = JSON.parse(body);
+    })
+    return tier;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   getRotation: getRotation,
   getChampion: getChampion,
@@ -96,5 +108,6 @@ module.exports = {
   searchMatchList: searchMatchList,
   searchMatch: searchMatch,
   getQueue: getQueue,
-  getSpell: getSpell
+  getSpell: getSpell,
+  getSummonerTier: getSummonerTier
 };
