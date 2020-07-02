@@ -66,6 +66,11 @@
         }
       }
     }
+    &-tierWrap{
+      display: inherit;
+      flex-direction: row;
+      margin-left: auto;
+    }
   }
   &-middle{
     width: 100%;

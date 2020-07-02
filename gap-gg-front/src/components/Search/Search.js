@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './Search.scss';
 import Loader from 'components/common/Loader';
 
-const Search = ({ isPending, summoner, getProfile, matchItem }) => {
+const Search = ({ isPending, summoner, getProfile, matchItem, tierItem, handleUpdateSummoner }) => {
   const { name, summonerLevel, profileIconId } = summoner;
   const src = profileIconId && getProfile(profileIconId);
   return (
@@ -18,7 +18,10 @@ const Search = ({ isPending, summoner, getProfile, matchItem }) => {
               </div>
               <div className="Search-top-midWrap">
                 <div className="Search-top-midWrap-name">{name}</div>
-                <button>갱신</button>
+                <button onClick={handleUpdateSummoner}>갱신</button>
+              </div>
+              <div className="Search-top-tierWrap">
+                {tierItem}
               </div>
             </div>
             <div className="Search-middle">
@@ -34,7 +37,9 @@ Search.propTypes = {
   isPending: PropTypes.bool.isRequired,
   summoner: PropTypes.object.isRequired,
   getProfile: PropTypes.func.isRequired,
-  matchItem: PropTypes.array.isRequired
+  matchItem: PropTypes.array.isRequired,
+  tierItem: PropTypes.array.isRequired,
+  handleUpdateSummoner: PropTypes.func.isRequired
 };
 
 export default Search;
