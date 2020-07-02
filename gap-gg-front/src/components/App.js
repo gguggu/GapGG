@@ -19,6 +19,10 @@ const App = () => {
         path='/search/:summoner'
         render={() => <Pages.SearchPage/>}
       />
+      <Route
+        path='/notfound'
+        render={() => {}}
+      />
     </Switch>
   );
 };
