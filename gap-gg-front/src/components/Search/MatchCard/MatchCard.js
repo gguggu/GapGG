@@ -16,6 +16,7 @@ const MatchCard = ({ matchData, src, summoner, spells, champions }) => {
   const [spellFirst, setSpellFirst] = useState('');
   const [spellSecond, setSpellSecond] = useState('');
   const [KDA, setKDA] = useState('');
+  const [averageKDA, setAverageKDA] = useState('');
   const [championLevel, setChampionLevel] = useState();
   const [items, setItems] = useState([]);
   const [teamMembers, setTeamMembers] = useState([]);
@@ -118,12 +119,16 @@ const MatchCard = ({ matchData, src, summoner, spells, champions }) => {
       return (
         <div key={idx} className="MatchCard-teamList-member">
           <img src={championSrc} alt=''/>
-          <div className="MatchCard-teamList-member-summonerName">{summonerName}</div>
+          <div className="MatchCard-teamList-member-summonerName" onClick={() => handleTeamMemberLink(summonerName)}>{summonerName}</div>
         </div>
       );
     });
 
     setTeamMembers(teamChampions);
+  }
+
+  const handleTeamMemberLink = (name) => {
+    window.open(`http://localhost:3000/search/${name}`);
   }
 
   const handleSpell = (firstSpell, secondSpell) => {
@@ -152,8 +157,16 @@ const MatchCard = ({ matchData, src, summoner, spells, champions }) => {
 
   const handleKDA = (stats) => {
     const { kills, deaths, assists } = stats;
-    const KDAData = `${kills}/${deaths}/${assists}`;
+    const KDAData = `${kills} / ${deaths} / ${assists}`;
     setKDA(KDAData);
+
+    const averaged = ((kills+assists)/deaths).toFixed(2);
+    if(averaged === 'Infinity')
+      setAverageKDA('perfect');
+    else if(averaged === 'NaN')
+      setAverageKDA('0.00');
+    else
+      setAverageKDA(averaged);
   }
 
   const handleItems = (stats) => {
@@ -196,10 +209,6 @@ const MatchCard = ({ matchData, src, summoner, spells, champions }) => {
       return '이벤트';
   }
 
-  const handleSummonerInfo = () => {
-    
-  }
-
   return (
     <div className={isWin ? 'MatchCard' : 'MatchCard fail'}>
       <div className="MatchCard-typeWrap">
@@ -222,6 +231,7 @@ const MatchCard = ({ matchData, src, summoner, spells, champions }) => {
       <div className="MatchCard-inGameWrap">
         <div className="MatchCard-inGameWrap-level">레벨{championLevel}</div>
         <div className="MatchCard-inGameWrap-kda">{KDA}</div>
+        <div className="MatchCard-inGameWrap-average">{averageKDA}:1 평점</div>
       </div>
       <div className="MatchCard-itemList">
         {items}
