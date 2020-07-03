@@ -29,19 +29,18 @@ class SummonerStore {
     }
   }
 
-  @action async searchMatchList(){
+  @action async searchMatchList(beginIdx, endIdx){
     try {
       const accountId = this.summoner.accountId;
-      const data = await SummonerRepository.searchMatchList(accountId, 0, 10);
+      const data = await SummonerRepository.searchMatchList(accountId, beginIdx, endIdx);
       this.matches = data.data.matches;
-
       return new Promise((resolve, reject) => {
         resolve();
       });
     } catch (error) {
       return new Promise((resolve, reject) => {
         reject(error);
-      })
+      });
     }
   }
 
@@ -127,6 +126,15 @@ class SummonerStore {
 
         processedTier.push(processedData);
       }
+
+      if(processedTier.length < 2){
+        this.tier = this.handleCheckTierList(processedTier);
+
+        return new Promise((resolve, reject) => {
+          resolve();
+        })
+      }
+
       this.tier=processedTier;
       console.log(this.tier);
 
@@ -138,6 +146,38 @@ class SummonerStore {
         reject(error);
       })
     }
+  }
+
+  @action handleCheckTierList(tierList) {
+    let checkedTier = tierList;
+    let isSoloRank = false;
+    let isFlexRank = false;
+    for(let data of checkedTier){
+      const { queueType } = data;
+      if(queueType === 'RANKED_SOLO_5x5')
+        isSoloRank = true;
+
+      if(queueType === 'RANKED_FLEX_SR')
+        isFlexRank = true;
+    }
+
+    if(!isSoloRank){
+      const soloData = {
+        queueType: 'RANKED_SOLO_5x5',
+        tier: 'UNRANK'
+      };
+      checkedTier.push(soloData);
+    }
+
+    if(!isFlexRank){
+      const flexData = {
+        queueType: 'RANKED_FLEX_SR',
+        tier: 'UNRANK'
+      };
+      checkedTier.push(flexData);
+    }
+
+    return checkedTier;
   }
 
   @action async arrangeDetailMatch(detailData, matchData){

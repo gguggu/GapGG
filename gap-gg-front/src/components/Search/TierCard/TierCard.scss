@@ -16,17 +16,20 @@
     min-height: 120px;
     -webkit-user-drag: none;
     user-select: none;
+    background: radial-gradient(circle, $transGray, $transGray, $blackTransColor);
+    border-radius: 70px;
+    box-shadow: 0 0 10px .5px $transGray;
   }
   &-contentWrap{
     display: inherit;
     flex-direction: column;
+    margin-left: 10px;
     &-queueType{
       font-size: 12px;
     }
     &-tier{
       font-size: 20px;
       font-family: $DOHYEON_REGULAR;
-      margin-bottom: 8px;
     }
     &-point{
       font-size: 16px;

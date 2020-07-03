@@ -10,9 +10,12 @@ const TierCard = ({ tierData, tierSrc, tierType }) => {
       <img src={tierSrc}/>
       <div className="TierCard-contentWrap">
         <div className="TierCard-contentWrap-queueType">{tierType}</div>
-        <div className="TierCard-contentWrap-tier">{tier} {rank}</div>
-        <div className="TierCard-contentWrap-point">{leaguePoints}LP</div>
-        <div className="TierCard-contentWrap-winlose">{wins}승 {losses}패</div>
+        {
+          tier === 'UNRANK' ? <div className="TierCard-contentWrap-tier">Unranked</div>
+            : <> <div className="TierCard-contentWrap-tier">{tier} {rank}</div>
+            <div className="TierCard-contentWrap-point">{leaguePoints}LP</div>
+            <div className="TierCard-contentWrap-winlose">{wins}승 {losses}패</div> </>
+        }
       </div>
     </div>
   );

@@ -10,7 +10,6 @@ import GRANDMASTER_ICON from 'assets/images/tierImages/Emblem_Grandmaster.png';
 import CHALLENGER_ICON from 'assets/images/tierImages/Emblem_Challenger.png';
 
 const useTierImage = tierName => {
-  console.log(tierName);
   if(tierName === 'IRON')
     return IRON_ICON;
 
