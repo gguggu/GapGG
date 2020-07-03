@@ -77,11 +77,12 @@ const MatchCard = ({ matchData, src, summoner, spells, champions }) => {
       const { participantId } = identity;
       const { summonerName } = identity.player;
       participants.forEach(user => {
-        const { championId } = user;
+        const { championId, teamId } = user;
         if(participantId === user.participantId){
           const memberData = {
             summonerName,
-            championId
+            championId,
+            teamId
           }
           teamMembers.push(memberData);
         }
@@ -93,17 +94,19 @@ const MatchCard = ({ matchData, src, summoner, spells, champions }) => {
 
   const handleTeamMembersChampion = (teamMembers) => {
     let teamChampionList = [];
+    
     champions.forEach(champ => {
       const { key } = champ;
       const { full } = champ.image;
       const championKey = parseInt(key);
       teamMembers.forEach(team => {
-        const { championId, summonerName } = team;
+        const { championId, summonerName, teamId } = team;
         if(championId === championKey){
           const championSrc = `${DDRAGON}/${VERSION}/img/champion/${full}`;
           const memberData = {
             summonerName,
-            championSrc
+            championSrc,
+            teamId
           }
           teamChampionList.push(memberData);
         }
@@ -113,8 +116,18 @@ const MatchCard = ({ matchData, src, summoner, spells, champions }) => {
     handleTeamMembersItem(teamChampionList);
   }
 
-  const handleTeamMembersItem = (teamChampionList) => {
-    const teamChampions = teamChampionList.map((teamChampion, idx) => {
+  const handleSortTeamMembers = (members) => {
+    const sortedMembers = members.sort((prev, next) => {
+      return prev.teamId < next.teamId ? -1 : prev.teamId > next.teamId ? 1 : 0;
+    });
+
+    return sortedMembers;
+  }
+
+  const handleTeamMembersItem = teamChampionList => {
+    const sortedTeamMembers = handleSortTeamMembers(teamChampionList);
+
+    const teamChampions = sortedTeamMembers.map((teamChampion, idx) => {
       const { summonerName, championSrc } = teamChampion;
       return (
         <div key={idx} className="MatchCard-teamList-member">
