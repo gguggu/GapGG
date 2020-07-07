@@ -14,6 +14,10 @@ const SearchContainer = ({ store, history }) => {
     searchSummoner, searchMatchList, getProfile, getSpell, spells, tier } = store.summoner;
   const { compareChampion, getChampion } = store.champion;
 
+  const [target, setTarget] = useState(null);
+  let [scrollCount, setScrollCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+
   const requestInitialData = useCallback(async() => {
     const path = history.location.pathname;
     const summonerName = path.split('search/').pop();
@@ -27,7 +31,8 @@ const SearchContainer = ({ store, history }) => {
     await getQueue()
     .catch(err => alert('큐 조회 에러'));
 
-    await searchMatchList()
+    await searchMatchList(scrollCount, scrollCount + 10)
+    .then(() => setScrollCount(10))
     .catch(err => alert('소환사 전적 에러'));
 
     await searchMatch()
@@ -47,6 +52,32 @@ const SearchContainer = ({ store, history }) => {
     getFunction();
   }, []);
 
+  const onIntersect = async([entry], observer) => {
+    if(entry.isIntersecting && !isLoading){
+      observer.unobserve(entry.target);
+      setIsLoading(true);
+      await getScrollMatch();
+      setIsLoading(false);
+      observer.observe(entry.target);
+    }
+  }
+
+  const getScrollMatch = async() => {
+    await searchMatchList(scrollCount, scrollCount + 10);
+    await searchMatch();
+    await getSpell();
+    await setScrollCount(scrollCount + 10);
+  }
+
+  useEffect(() => {
+    let observer;
+    if(target){
+      observer = new IntersectionObserver(onIntersect, { threshold: 0.5 });
+      observer.observe(target);
+    }
+    return () => observer && observer.disconnect();
+  });
+
   const handleUpdateSummoner = async() => {
     const path = history.location.pathname;
     const summonerName = path.split('search/').pop();
@@ -60,7 +91,8 @@ const SearchContainer = ({ store, history }) => {
     await getQueue()
     .catch(err => alert('큐 조회 에러'));
   
-    await searchMatchList()
+    await searchMatchList(0, scrollCount + 10)
+    .then(() => setScrollCount(10))
     .catch(err => alert('소환사 전적 에러'));
   
     await searchMatch()
@@ -94,7 +126,9 @@ const SearchContainer = ({ store, history }) => {
     return <TierCard tierData={data} tierSrc={tierSrc} tierType={tierType} key={idx}/>;
   });
 
-  return <Search isPending={isPending} summoner={summoner} getProfile={getProfile} matchItem={matchItem} tierItem={tierItem} handleUpdateSummoner={handleUpdateSummoner}/>;
+  return <Search setTarget={setTarget} isPending={isPending} summoner={summoner}
+  getProfile={getProfile} matchItem={matchItem} tierItem={tierItem} isLoading={isLoading}
+  handleUpdateSummoner={handleUpdateSummoner}/>;
 };
 
 SearchContainer.propTypes = {

@@ -80,4 +80,8 @@
     flex-direction: column;
     flex-wrap: wrap;
   }
+  &-loading{
+    width: 100%;
+    color: $white;
+  }
 }
