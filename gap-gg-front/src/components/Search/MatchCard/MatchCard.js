@@ -34,28 +34,28 @@ const MatchCard = ({ matchData, src, summoner, spells, champions }) => {
     handleDifferenceTime();
   }, []);
   
-  const handleParticipants = () => {
-    const { name } = summoner;
-    participantIdentities.some(data => {
+  const handleParticipants = async() => {
+    const { id } = summoner;
+    for(let data of participantIdentities){
       const { participantId } = data;
-      const { summonerName } = data.player;
-      if(summonerName === name){
-        handleSearchSummoner(participantId);
-        return true;
+      const { summonerId } = data.player;
+      if(summonerId === id){
+        await handleSearchSummoner(participantId);
+        break;
       }
-    });
+    }
   }
 
-  const handleSearchSummoner = (idx) => {
-    participants.some(data => {
+  const handleSearchSummoner = async(idx) => {
+    for(let data of participants){
       const { participantId, teamId, spell1Id, spell2Id, stats } = data;
       if(participantId === idx){
-        handleSearchTeam(teamId);
-        handleSpell(spell1Id, spell2Id);
-        handleStats(stats);
-        return true;
+        await handleSearchTeam(teamId);
+        await handleSpell(spell1Id, spell2Id);
+        await handleStats(stats);
+        break;
       }
-    });
+    }
   }
 
   const handleSearchTeam = (idx) => {
@@ -177,9 +177,9 @@ const MatchCard = ({ matchData, src, summoner, spells, champions }) => {
     if(averaged === 'Infinity')
       setAverageKDA('perfect');
     else if(averaged === 'NaN')
-      setAverageKDA('0.00');
+      setAverageKDA('0.00:1 평점');
     else
-      setAverageKDA(averaged);
+      setAverageKDA(averaged + ':1 평점');
   }
 
   const handleItems = (stats) => {
@@ -244,7 +244,7 @@ const MatchCard = ({ matchData, src, summoner, spells, champions }) => {
       <div className="MatchCard-inGameWrap">
         <div className="MatchCard-inGameWrap-level">레벨{championLevel}</div>
         <div className="MatchCard-inGameWrap-kda">{KDA}</div>
-        <div className="MatchCard-inGameWrap-average">{averageKDA}:1 평점</div>
+        <div className="MatchCard-inGameWrap-average">{averageKDA}</div>
       </div>
       <div className="MatchCard-itemList">
         {items}
