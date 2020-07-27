@@ -17,32 +17,37 @@ const SearchContainer = ({ store, history }) => {
   const [target, setTarget] = useState(null);
   let [scrollCount, setScrollCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [hadError, setHadError] = useState(false);
 
   const requestInitialData = useCallback(async() => {
     const path = history.location.pathname;
     const summonerName = path.split('search/').pop();
 
-    await searchSummoner(summonerName)
-    .catch(err => alert('소환사 검색 에러'));
+    await searchSummoner(summonerName, '')
+    .catch(err => alertError('summoner', err));
 
     await getSummonerTier()
-    .catch(err => alert('소환사 티어 검색 에러'));
+    .catch(err => alertError('tier', err));
 
     await getQueue()
-    .catch(err => alert('큐 조회 에러'));
+    .catch(err => alertError('queue', err));
 
-    await searchMatchList(scrollCount, scrollCount + 10)
-    .then(() => setScrollCount(10))
-    .catch(err => alert('소환사 전적 에러'));
+    await searchMatchList(scrollCount, scrollCount + 10, '')
+    .then(() => {
+      setScrollCount(10);
+      setHadError(false);
+    })
+    .catch(err => alertError('matchList', err));
 
     await searchMatch()
-    .catch(err => alert('소환사 개별 전적 에러'));
+    .then(() => setHadError(false))
+    .catch(err => alertError('match', err));
 
     await getChampion()
-    .catch(err => alert('챔피언 조회 에러'));
+    .catch(err => alertError('champion', err));
 
     await getSpell()
-    .catch(err => alert('소환사 스펠 조회 에러'));
+    .catch(err => alertError('spell', err));
     
   }, [searchSummoner, searchMatchList, searchMatch, getChampion, getQueue, getSpell, getSummonerTier]);
 
@@ -63,9 +68,14 @@ const SearchContainer = ({ store, history }) => {
   }
 
   const getScrollMatch = async() => {
-    await searchMatchList(scrollCount, scrollCount + 10);
-    await searchMatch();
-    await getSpell();
+    await searchMatchList(scrollCount, scrollCount + 10)
+    .then(() => setHadError(false))
+    .catch(err => alertError('matchList', err));
+    await searchMatch()
+    .then(() => setHadError(false))
+    .catch(err => alertError('match', err));
+    await getSpell()
+    .catch(err => alertError('spell', err));
     await setScrollCount(scrollCount + 10);
   }
 
@@ -82,27 +92,73 @@ const SearchContainer = ({ store, history }) => {
     const path = history.location.pathname;
     const summonerName = path.split('search/').pop();
     
-    await searchSummoner(summonerName)
-      .catch(err => alert('소환사 검색 에러'));
+    await searchSummoner(summonerName, '')
+      .catch(err => alertError('summoner', err));
   
     await getSummonerTier()
-    .catch(err => alert('소환사 티어 검색 에러'));
+    .catch(err => alertError('tier', err));
   
     await getQueue()
-    .catch(err => alert('큐 조회 에러'));
+    .catch(err => alertError('queue', err));
   
     await searchMatchList(0, scrollCount + 10)
-    .then(() => setScrollCount(10))
-    .catch(err => alert('소환사 전적 에러'));
+    .then(() => {
+      setScrollCount(10);
+      setHadError(false);
+    })
+    .catch(err => alertError('matchList', err));
   
     await searchMatch()
-    .catch(err => alert('소환사 개별 전적 에러'));
+    .then(() => setHadError(false))
+    .catch(err => alertError('match', err));
   
     await getChampion()
-    .catch(err => alert('챔피언 조회 에러'));
+    .catch(err => alertError('champion', err));
   
     await getSpell()
-    .catch(err => alert('소환사 스펠 조회 에러'));
+    .catch(err => alertError('spell', err));
+  }
+
+  const alertError = (type, err) => {
+    if(hadError)
+      return;
+
+    if(type === 'match'){
+      alert(`소환사 개별 전적 에러 ${err.message}`)
+      setHadError(true);
+      return;
+    }
+
+    if(type === 'matchList'){
+      alert(`소환사 전적 리스트 조회 ${err.message}`);
+      setHadError(true);
+      return;
+    }
+
+    if(type === 'spell'){
+      alert('소환사 스펠 조회 에러');
+      return;
+    }
+
+    if(type === 'champion'){
+      alert('챔피언 조회 에러');
+      return;
+    }
+
+    if(type === 'queue'){
+      alert('큐 조회 에러');
+      return;
+    }
+
+    if(type === 'summoner'){
+      alert(`소환사 정보 조회 ${err.message}`);
+      return;
+    }
+
+    if(type === 'tier'){
+      alert('소환사 티어 검색 에러');
+      return;
+    }
   }
 
   const matchItem = detailMatches.map((data, idx) => {
