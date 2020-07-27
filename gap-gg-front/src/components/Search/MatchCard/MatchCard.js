@@ -18,6 +18,8 @@ const MatchCard = ({ matchData, src, summoner, spells, champions }) => {
   const [KDA, setKDA] = useState('');
   const [averageKDA, setAverageKDA] = useState('');
   const [championLevel, setChampionLevel] = useState();
+  const [CS, setCS] = useState('');
+  const [multiKill, setMultiKill] = useState('');
   const [items, setItems] = useState([]);
   const [teamMembers, setTeamMembers] = useState([]);
 
@@ -162,10 +164,12 @@ const MatchCard = ({ matchData, src, summoner, spells, champions }) => {
   }
 
   const handleStats = (stats) => {
-    const { champLevel } = stats;
+    const { champLevel, totalMinionsKilled } = stats;
     handleKDA(stats);
     handleItems(stats);
     setChampionLevel(champLevel);
+    setCS(totalMinionsKilled);
+    setMultiKill(handleMultiKill(stats));
   }
 
   const handleKDA = (stats) => {
@@ -180,6 +184,21 @@ const MatchCard = ({ matchData, src, summoner, spells, champions }) => {
       setAverageKDA('0.00:1 평점');
     else
       setAverageKDA(averaged + ':1 평점');
+  }
+
+  const handleMultiKill = stats => {
+    const { doubleKills, tripleKills, quadraKills, pentaKills } = stats;
+
+    if(pentaKills > 0)
+      return '펜타킬';
+    else if(quadraKills > 0)
+      return '쿼드라킬';
+    else if(tripleKills > 0)
+      return '트리플킬';
+    else if(doubleKills > 0)
+      return '더블킬';
+    else
+      return '';
   }
 
   const handleItems = (stats) => {
@@ -242,9 +261,16 @@ const MatchCard = ({ matchData, src, summoner, spells, champions }) => {
         </div>
       </div>
       <div className="MatchCard-inGameWrap">
-        <div className="MatchCard-inGameWrap-level">레벨{championLevel}</div>
         <div className="MatchCard-inGameWrap-kda">{KDA}</div>
         <div className="MatchCard-inGameWrap-average">{averageKDA}</div>
+        {
+          multiKill === '' ? <></>
+            : <div className="MatchCard-inGameWrap-multiKill">{multiKill}</div>
+        }
+      </div>
+      <div className="MatchCard-dataWrap">
+        <div className="MatchCard-dataWrap-level">레벨{championLevel}</div>
+        <div className="MatchCard-dataWrap-cs">CS {CS}개</div>
       </div>
       <div className="MatchCard-itemList">
         {items}
