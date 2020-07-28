@@ -6,208 +6,139 @@
   width: 100%;
   height: 100%;
   flex-direction: column;
-  &-inputs{
-    width: 100%;
-    display: inherit;
-    flex-direction: row;
-    margin-bottom: 12px;
-    &-input{
-      width: 220px;
-      height: 35px;
-      display: inherit;
-      border: 0;
-      outline: 0;
-      margin-right: 12px;
-      background-color: $backShadowColor;
-      border-radius: 1px;
-      color: $white;
-      font-family: $DOHYEON_REGULAR;
-      padding: 5px;
-      &::placeholder{
-        color: $gray;
-        font-family: $DOHYEON_REGULAR;
-      }
-    }
+  &-desc{
+    color: $transGray;
+    font-size: 12px;
+    margin-top: 30px;
   }
   &-contents{
     width: 100%;
-    height: 100%;
+    height: auto;
+    min-height: 800px;
     display: inherit;
     flex-direction: row;
     &-leftCtt{
-      width: 70%;
-      height: 100%;
+      width: 50%;
+      height: auto;
       display: inherit;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-content: flex-start;
+      border-radius: 3px;
+      flex-direction: column;
       margin-right: 12px;
-      &-box{
-        background-color: $backColor;
+      border-right: 1px solid $transGray;
+      &-top{
         display: inherit;
         flex-direction: column;
-        width: 350px;
-        height: 200px;
-        margin: 10px;
-        border-radius: 3px;
-        &-title{
-          display: inherit;
-          align-items: center;
-          font-family: $DOHYEON_REGULAR;
-          font-size: 24px;
-          color: $white;
-          border-left: 5px solid $backShadowColor;
-          padding-left: 8px;
-          width: 100%;
-          height: 40px;
+        color: $white;
+        width: 100%;
+        height: 300px;
+        min-height: 300px;
+        justify-content: center;
+        align-items: center;
+        &>img{
+          width: 124px;
+          min-width: 124px;
+          height: 124px;
+          min-height: 124px;
+          border-radius: 60px;
+          border: 2px solid $backColor;
+          margin-bottom: 15px;
         }
-        &-boxContent{
+        &-name{
+          font-size: 24px;
+          font-family: $DOHYEON_REGULAR;
+        }
+        &-lane{
+          font-size: 18px;
+        }
+      }
+      &-infoList{
+        display: inherit;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        align-items: center;
+        &-infoCard{
+          width: 420px;
+          height: 60px;
           display: inherit;
           flex-direction: row;
-          width: 100%;
-          height: 80%;
+          font-size: 20px;
           color: $white;
-          &-lefter{ 
-            display: inherit;
-            flex-direction: column;
-            width: 50%;
-            height: 100%;
-            &-name{
-              display: inherit;
-              align-items: center;
-              justify-content: center;
-              height: 40%;
-              font-size: 14px;
-              color: $white;
-            }
-            &-score{
-              display: inherit;
-              align-items: center;
-              justify-content: center;
-              height: 60%;
-              font-size: 20px;
-              color: $white;
-            }
+          background-color: $blackTransColor;
+          align-items: center;
+          justify-content: center;
+          padding: 0 30px;
+          margin: 10px 0;
+          &:hover{
+            box-shadow: 0 0 10px 3px $black;
           }
-          &-righter{
-            display: inherit;
-            flex-direction: column;
-            width: 50%;
-            height: 100%;
-            &-name{
-              display: inherit;
-              align-items: center;
-              justify-content: center;
-              height: 40%;
-              font-size: 14px;
-              color: $white;
-            }
-            &-score{
-              display: inherit;
-              align-items: center;
-              justify-content: center;
-              height: 60%;
-              font-size: 20px;
-              color: $white;
-            }
+          &.win{
+            background-color: $backShadowTransColor;
+          }
+          &-cardTitle{
+            margin-right: auto;
           }
         }
       }
     }
     &-rightCtt{
-      width: 30%;
-      height: 40%;
+      width: 50%;
+      height: 100%;
       display: inherit;
       flex-direction: column;
-      &-box{
-        width: 100%;
-        height: 100%;
-        background-color: $backColor;
+      border-radius: 3px;
+      &-top{
         display: inherit;
         flex-direction: column;
-        border-radius: 3px;
-        &-title{
-          display: inherit;
-          align-items: center;
-          font-family: $DOHYEON_REGULAR;
-          font-size: 24px;
-          color: $white;
-          border-left: 5px solid $backShadowColor;
-          padding-left: 8px;
-          width: 100%;
-          height: 40px;
+        color: $white;
+        width: 100%;
+        height: 300px;
+        min-height: 300px;
+        justify-content: center;
+        align-items: center;
+        &>img{
+          width: 124px;
+          min-width: 124px;
+          height: 124px;
+          min-height: 124px;
+          border-radius: 60px;
+          border: 2px solid $backColor;
+          margin-bottom: 15px;
         }
-        &-boxContent{
+        &-name{
+          font-size: 24px;
+          font-family: $DOHYEON_REGULAR;
+        }
+        &-lane{
+          font-size: 18px;
+        }
+      }
+      &-infoList{
+        display: inherit;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        align-items: center;
+        &-infoCard{
+          width: 420px;
+          height: 60px;
           display: inherit;
           flex-direction: row;
-          width: 100%;
-          height: 100%;
+          font-size: 20px;
           color: $white;
-          &-lefter{
-            display: inherit;
-            flex-direction: column;
-            width: 50%;
-            height: 100%;
-            &-name{
-              display: inherit;
-              align-items: center;
-              justify-content: center;
-              height: 40%;
-              font-size: 14px;
-              color: $white;
-            }
-            &-score{
-              display: inherit;
-              align-items: center;
-              justify-content: center;
-              flex-direction: row;
-              height: 60%;
-              font-size: 20px;
-              color: $white;
-              &-position{
-                display: inherit;
-                flex-direction: column;
-                font-size: 16px;
-                margin-right: 8px;
-                &>img{
-                  width: 32px;
-                  height: 32px;
-                }
-              }
-            }
+          background-color: $blackTransColor;
+          align-items: center;
+          justify-content: center;
+          padding: 0 30px;
+          margin: 10px 0;
+          &:hover{
+            box-shadow: 0 0 10px 3px $black;
           }
-          &-righter{
-            display: inherit;
-            flex-direction: column;
-            width: 50%;
-            height: 100%;
-            &-name{
-              display: inherit;
-              align-items: center;
-              justify-content: center;
-              height: 40%;
-              font-size: 14px;
-              color: $white;
-            }
-            &-score{
-              display: inherit;
-              align-items: center;
-              justify-content: center;
-              flex-direction: row;
-              height: 60%;
-              font-size: 20px;
-              color: $white;
-              &-position{
-                display: inherit;
-                flex-direction: column;
-                font-size: 16px;
-                margin-right: 8px;
-                &>img{
-                  width: 32px;
-                  height: 32px;
-                }
-              }
-            }
+          &.win{
+            background-color: $backShadowTransColor;
+          }
+          &-cardTitle{
+            margin-right: auto;
           }
         }
       }
