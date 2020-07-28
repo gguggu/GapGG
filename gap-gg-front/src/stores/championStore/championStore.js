@@ -11,7 +11,7 @@ class championStore {
   @action async getChampion() {
     try {
       const data = await championRepository.getChampion();
-      const championData = data.data.data;
+      const championData = data.data.data.data;
 
       const championList = Object.keys(championData).map(key => {
         return [String(key), championData[key]];
@@ -29,8 +29,9 @@ class championStore {
         resolve();
       });
     } catch (error) {
+      const { data } = error.response;
       return new Promise((resolve, reject) => {
-        reject(error);
+        reject(data);
       });
     }
   }
@@ -38,7 +39,7 @@ class championStore {
   @action async getRotaition() {
     try {
       const data = await championRepository.getRotaition();
-      const rotationData = data.data.freeChampionIds;
+      const rotationData = data.data.data.freeChampionIds;
 
       this.rotation=[];
 
@@ -60,8 +61,9 @@ class championStore {
         resolve();
       });
     } catch (error) {
+      const { data } = error.response;
       return new Promise((resolve, reject) => {
-        reject(error);
+        reject(data);
       });
     }
   }
