@@ -3,7 +3,7 @@ const RIOT_URL = 'https://kr.api.riotgames.com/lol';
 const DDRAGON_URL = 'http://ddragon.leagueoflegends.com/cdn';
 const DEVELOPER_URL = 'http://static.developer.riotgames.com/docs';
 const API_KEY = 'RGAPI-221a2f09-67f5-4b23-bfe6-8021b8c97d53';
-const VERSION = '10.13.1';
+const VERSION = '10.15.1';
 
 const getRotation = async () => {
   try {
