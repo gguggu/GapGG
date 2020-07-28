@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Pages from '../pages';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 const App = () => {
   return (
@@ -12,7 +12,7 @@ const App = () => {
       />
       <Route
         exact
-        path='/compare'
+        path='/compare/:summoner'
         render={() => <Pages.ComparePage/>}
       />
       <Route
@@ -21,8 +21,9 @@ const App = () => {
       />
       <Route
         path='/notfound'
-        render={() => {}}
+        render={() => <Pages.NotFoundPage/>}
       />
+      <Redirect to='/notfound'/>
     </Switch>
   );
 };
