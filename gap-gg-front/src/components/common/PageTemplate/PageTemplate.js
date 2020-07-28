@@ -7,7 +7,9 @@ import Footer from '../Footer';
 const PageTemplate = ({ type, children }) => {
   return (
     <div className="PageTemplate">
-      <div className="PageTemplate-back"/>
+      <div className={ type === 'home' ? "PageTemplate-back" 
+      : type === 'search' ? "PageTemplate-back search" 
+      : "PageTemplate-back compare" }/>
       <div className="PageTemplate-nav">
         <Navigation pageType={type}/>
       </div>

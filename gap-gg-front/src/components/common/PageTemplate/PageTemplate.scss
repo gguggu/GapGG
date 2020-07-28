@@ -19,6 +19,12 @@
     opacity: .3;
     z-index: -1;
     position: absolute;
+    &.search{
+      background-image: url("../../../assets/images/gap-back4.jpg");
+    }
+    &.compare{
+      background-image: url("../../../assets/images/gap-back2.jpg");
+    }
     &::after{
       content: "";
       background: linear-gradient(transparent, $black) 0 repeat;
