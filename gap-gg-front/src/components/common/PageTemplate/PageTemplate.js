@@ -11,7 +11,7 @@ const PageTemplate = ({ type, children }) => {
       : type === 'search' ? "PageTemplate-back search" 
       : "PageTemplate-back compare" }/>
       <div className="PageTemplate-nav">
-        <Navigation pageType={type}/>
+        <Navigation/>
       </div>
       <div className="PageTemplate-body">
         {children}

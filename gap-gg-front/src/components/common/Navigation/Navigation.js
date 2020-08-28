@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './Navigation.scss';
 import LOGO from 'assets/images/GapLogo_white.png';
@@ -12,9 +11,6 @@ const Navigation = () => {
       </Link>
     </div>
   );
-};
-
-Navigation.propTypes = {
 };
 
 export default Navigation;
